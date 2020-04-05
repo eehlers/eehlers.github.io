@@ -3,8 +3,6 @@
 
 This article explore's ledger's functionality for bitcoin message signing.  This article follows on from [Programming Ledger #1 - Setup](./ledger.00.setup.md).
 
-Click here to go back to my home page: [eehlers.github.io](./README.md)
-
 ## Bitcoin Message Signing
 
 Bitcoin message signing lets you sign a message using one of the private keys in your wallet.  It's a way of proving that you control any funds at the corresponding address.

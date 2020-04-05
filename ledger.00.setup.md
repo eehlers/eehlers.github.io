@@ -5,8 +5,6 @@ This article provides an introduction to writing code for the Ledger.  The ledge
 
 A followup to this article may be found at the following link: [Programming Ledger #2 - Bitcoin Message Signing](./ledger.01.message.md)
 
-Click here to go back to my home page: [eehlers.github.io](./README.md)
-
 ## Terminology
 
 The Ledger documentation uses a lot of acronyms, and occasionally you will come across an acronym before you have seen its definition.  Here is a list of terms that you are likely to encounter, and their meanings:
