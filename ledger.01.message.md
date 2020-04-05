@@ -164,7 +164,7 @@ It turns out that the value returned by btchip-python is DER-encoded.  Which is 
 
 In fact, ledger's DER encoding is nonstandard too.  DER encoded values always have `0x30` as the first byte, it's part of the standard.  But bitcoin message signatures that come back from the ledger will have `0x31` as the first byte half of the time.  An explanation for this appears in the [SDK](https://github.com/LedgerHQ/nanos-secure-sdk) source code, in file `nanos-secure-sdk/include/lcx_ecdsa.h`, in the comments for function `cx_ecdsa_sign`:
 
-```C
+```c
 /**
  * Sign a hash message according to ECDSA specification.
  *
@@ -221,7 +221,7 @@ As far as I can tell, ledger does not supply any python scripts to verify a bitc
 Suppose you have the message, the public key against which it was signed, and the signature.  Before you can verify the signature, you must first prepend to the message the magic string mentioned above, and take the hash of the result.  Ledger already contains the code to do that, in the place where it signed the message (`btchip_apdu_sign_message()`), so you just need to copy and paste that functionality into your new verification function, and then call `cx_ecdsa_verify()`.
 
 Here is an example function.  When I call this function with the inputs from our example, it returns true!
-```C
+```c
 int verify(
         cx_sha256_t *messageHash,
         unsigned char *message,
