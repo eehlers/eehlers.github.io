@@ -221,7 +221,7 @@ As far as I can tell, ledger does not supply any python scripts to verify a bitc
 Suppose you have the message, the public key against which it was signed, and the signature.  Before you can verify the signature, you must first prepend to the message the magic string mentioned above, and take the hash of the result.  Ledger already contains the code to do that, in the place where it signed the message (`btchip_apdu_sign_message()`), so you just need to copy and paste that functionality into your new verification function, and then call `cx_ecdsa_verify()`.
 
 Here is an example function.  When I call this function with the inputs from our example, it returns true!
-```C
+```c
 int verify(
         cx_sha256_t *messageHash,
         unsigned char *message,
