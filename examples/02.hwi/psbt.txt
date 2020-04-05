@@ -1,0 +1,49 @@
+{'fee': Decimal('0.00001870'),
+ 'inputs': [{'bip32_derivs': [{'master_fingerprint': '73c5da0a',
+                               'path': "m/44'/0'/0/0",
+                               'pubkey': '0325a43c24b88a75e509c8e0ae63d174dfb9b7ddcabeeace2904eda4dcfc4900ae'},
+                              {'master_fingerprint': '0be174ee',
+                               'path': "m/44'/0'/0/0",
+                               'pubkey': '037be208471d8facf1a6da3d2ae60b884b7bd48fbde035a65252bf5cf6cb2163a8'},
+                              {'master_fingerprint': '8d55ff0d',
+                               'path': "m/44'/0'/0/0",
+                               'pubkey': '0390ab062ddb42230bfa4d80b49d066c026b0f05e0b6da26470d94d4b806221e8f'}],
+             'witness_script': {'asm': 'OP_IF 2 '
+                                       '0325a43c24b88a75e509c8e0ae63d174dfb9b7ddcabeeace2904eda4dcfc4900ae '
+                                       '037be208471d8facf1a6da3d2ae60b884b7bd48fbde035a65252bf5cf6cb2163a8 '
+                                       '0390ab062ddb42230bfa4d80b49d066c026b0f05e0b6da26470d94d4b806221e8f '
+                                       '3 OP_CHECKMULTISIG OP_ELSE 500 '
+                                       'OP_CHECKSEQUENCEVERIFY OP_DROP 2 '
+                                       '0325a43c24b88a75e509c8e0ae63d174dfb9b7ddcabeeace2904eda4dcfc4900ae '
+                                       '02b00df1d5d8c1b8061dad8f4c20e2da6283f94866e18ba8d280ddcfe07c592d4c '
+                                       '021039af45ef98a7bed5ba126ee3c9b3c4ccc833f7126237168ea0fab4a964c084 '
+                                       '3 OP_CHECKMULTISIG OP_ENDIF',
+                                'hex': '6352210325a43c24b88a75e509c8e0ae63d174dfb9b7ddcabeeace2904eda4dcfc4900ae21037be208471d8facf1a6da3d2ae60b884b7bd48fbde035a65252bf5cf6cb2163a8210390ab062ddb42230bfa4d80b49d066c026b0f05e0b6da26470d94d4b806221e8f53ae6702f401b27552210325a43c24b88a75e509c8e0ae63d174dfb9b7ddcabeeace2904eda4dcfc4900ae2102b00df1d5d8c1b8061dad8f4c20e2da6283f94866e18ba8d280ddcfe07c592d4c21021039af45ef98a7bed5ba126ee3c9b3c4ccc833f7126237168ea0fab4a964c08453ae68',
+                                'type': 'nonstandard'},
+             'witness_utxo': {'amount': Decimal('1.00000000'),
+                              'scriptPubKey': {'address': 'bcrt1q2qka0z80mtl77v2rr2k2knlv625uulu8wvsylr7s0uwdm5auj5sqe2ty7l',
+                                               'asm': '0 '
+                                                      '502dd788efdaffef31431aacab4fecd2a9ce7f8773204f8fd07f1cddd3bc9520',
+                                               'hex': '0020502dd788efdaffef31431aacab4fecd2a9ce7f8773204f8fd07f1cddd3bc9520',
+                                               'type': 'witness_v0_scripthash'}}}],
+ 'outputs': [{}],
+ 'tx': {'hash': '07f8c5e883356bead585dc4de59a02459dfecfc5b9cacd648687b122e83b56a4',
+        'locktime': 0,
+        'size': 94,
+        'txid': '07f8c5e883356bead585dc4de59a02459dfecfc5b9cacd648687b122e83b56a4',
+        'version': 2,
+        'vin': [{'scriptSig': {'asm': '', 'hex': ''},
+                 'sequence': 4294967293,
+                 'txid': 'f4efb3518dabe3e6cca96eb2bc609aa7077e0f613d6bf7468ffb2d0c10bfaecd',
+                 'vout': 0}],
+        'vout': [{'n': 0,
+                  'scriptPubKey': {'addresses': ['bcrt1qg9aulw27jnhvx6gr8ugtt5rfer762w0a4a8nq6kuy9zgmnefve4qkl4ys9'],
+                                   'asm': '0 '
+                                          '417bcfb95e94eec369033f10b5d069c8fda539fdaf4f306adc21448dcf29666a',
+                                   'hex': '0020417bcfb95e94eec369033f10b5d069c8fda539fdaf4f306adc21448dcf29666a',
+                                   'reqSigs': 1,
+                                   'type': 'witness_v0_scripthash'},
+                  'value': Decimal('0.99998130')}],
+        'vsize': 94,
+        'weight': 376},
+ 'unknown': {}}

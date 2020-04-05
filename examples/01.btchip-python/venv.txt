@@ -1,0 +1,16 @@
+
+virtualenv venv
+source venv/bin/activate
+pip install ecdsa
+cd /home/erik/projects/ledger/btchip-python.ledger
+pip install .
+
+cd /home/erik/projects/ledger/btchip-python.ledger/samples
+python getFirmwareVersion.py
+
+#export SEED="token output grass below such awake census safe orphan device other meat"
+export SEED="barely sun snack this snack relief pipe attack disease boss enlist lawsuit"
+./speculos.py --seed "$SEED" apps/btc.elf
+
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 ./sign.00.btchip.py
+

@@ -1,0 +1,16 @@
+
+virtualenv venv
+source venv/bin/activate
+cd /home/erik/projects/ledger/authorization/repos/blue-loader-python
+pip install .
+
+echo 'e0c4000000' | python -m ledgerblue.runScript --apdu
+echo 'e0c4000000' | LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 python -m ledgerblue.runScript --apdu
+
+# device has to be on dashboard (i.e. not running an app).  Doesn't work on the emulator
+python -m ledgerblue.listApps --targetId 0x31100004
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 python -m ledgerblue.listApps --targetId 0x31100004
+python -m ledgerblue.listApps --targetId 0x31100004 --apdu
+echo 'e0de000000' | python -m ledgerblue.runScript --apdu
+echo 'e0de000000' | LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 python -m ledgerblue.runScript --apdu
+
