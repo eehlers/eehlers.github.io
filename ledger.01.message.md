@@ -11,7 +11,7 @@ Suppose that you pay a vendor and they ask you to prove that the money came from
 
 Any message that you sign must always be explicit, including at least your name (or other identifier), the date and time, the recipient's name (or other identifier), and the purpose of the message.  Signing a vague message is dangerous.  For example, suppose you sign the message "I approve".  Someone else could take that message and the signature and falsely claim control over the corresponding key, in some context completely unrelated to the circumstances in which you signed the original message.
 
-Before signing the message, bitcoin prepends to it the magic string "Bitcoin Signed Message:".  This is to prevent someone from tricking you into signing something that you shouldn't, such as a transaction.
+Before signing the message, bitcoin prepends to it the magic string `Bitcoin Signed Message:`.  This is to prevent someone from tricking you into signing something that you shouldn't, such as a transaction.
 
 Normally, in order to verify a signature cryptographically, you would need the message, the signature, and the public key.  However, the ECDSA cryptography underlying bitcoin supports derivation of the public key given the message and the signature.  Bitcoin exploits this feature of ECDSA and hence bitcoin can verify a signature using only the message, the public key is not required.  Usually you pass to the verification function the address against which the message was signed, the function derives the public key and confirms that it matches the given address.
 
@@ -21,7 +21,7 @@ The examples below use the following seed phrase:
 
     barely sun snack this snack relief pipe attack disease boss enlist lawsuit
 
-If you want to follow along, then at some point you will need to fire up a ledger with that seed phrase.  Either you can configure a ledger using the value above, or you can change that value to match the one for your ledger.
+If you want to follow along, then at some point you will need to fire up a ledger with that seed phrase.  Either you can configure a ledger using the value above, or you can change that value to match the one for your ledger.  A seed phrase relating to a wallet containing actual money should never be typed into an online computer.
 
 ## Electrum
 
@@ -221,7 +221,7 @@ As far as I can tell, ledger does not supply any python scripts to verify a bitc
 Suppose you have the message, the public key against which it was signed, and the signature.  Before you can verify the signature, you must first prepend to the message the magic string mentioned above, and take the hash of the result.  Ledger already contains the code to do that, in the place where it signed the message (`btchip_apdu_sign_message()`), so you just need to copy and paste that functionality into your new verification function, and then call `cx_ecdsa_verify()`.
 
 Here is an example function.  When I call this function with the inputs from our example, it returns true!
-```c
+```C
 int verify(
         cx_sha256_t *messageHash,
         unsigned char *message,
