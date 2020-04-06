@@ -1,0 +1,11 @@
+vi \
+./00.blue-loader-python/venv.txt \
+./01.btchip-python/venv.txt \
+./01.btchip-python/sign.00.btchip.py \
+./01.btchip-python/testMessageSignature2.py \
+./01.btchip-python/testMessageSignature.py \
+./02.hwi/venv.txt \
+./02.hwi/sign.01.hwi.py \
+./02.hwi/messagesign.01.hwi.py \
+./03.btclib/venv.txt \
+./03.btclib/foo.py

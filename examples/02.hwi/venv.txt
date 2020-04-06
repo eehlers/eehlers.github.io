@@ -6,7 +6,8 @@ pip install .
 
 ./sign.01.hwi.py
 
-LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 python sign.01.hwi.py
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 ./sign.01.hwi.py
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 ./messagesign.01.hwi.py
 
 export SEED="token output grass below such awake census safe orphan device other meat"
 ./speculos.py --seed "$SEED" apps/btc.elf

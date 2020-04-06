@@ -89,7 +89,21 @@ First the script prints out a hash of the message:
 
     b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
 
-Then the script asks the device to sign the message.  The device displays the above hash, this is to make sure that you are signing the right thing.  Then it prompts you to sign the message.  This is the signature we get back:
+Then the script asks the device to sign the message.  The device displays the above hash, this is to make sure that you are signing the right thing.  Then it prompts you to sign the message.
+
+![ledger-btchip](img/screenshot.01.11.ledger.btchip.png "ledger-btchip")
+
+![ledger-btchip](img/screenshot.01.12.ledger.btchip.png "ledger-btchip")
+
+![ledger-btchip](img/screenshot.01.13.ledger.btchip.png "ledger-btchip")
+
+![ledger-btchip](img/screenshot.01.14.ledger.btchip.png "ledger-btchip")
+
+![ledger-btchip](img/screenshot.01.15.ledger.btchip.png "ledger-btchip")
+
+![ledger-btchip](img/screenshot.01.16.ledger.btchip.png "ledger-btchip")
+
+This is the signature we get back:
 
     3045022100af3136513cca5cac54a9f5b3ac96c313bd0a15611da6ac6e2af3aed01041532102201e6c31c5428badf2e04d7756a9671e5674bccd61422e283ee654f4a3e4a2b7cf
 
@@ -108,6 +122,26 @@ As before, this script is shorter than the equivalent script for  btchip-python.
 ![output](img/screenshot.01.10.output.png "output")
 
 Again the script prints out a hash of the message.  Then HWI asks the ledger to sign the message.  The device displays the relevant address.  Then it behaves exactly as it did in the previous example - it displays the message hash, and asks you to confirm that you want to sign the message.
+
+![ledger-hwi](img/screenshot.01.17.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.18.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.19.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.20.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.21.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.22.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.23.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.24.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.25.ledger.hwi.png "ledger-hwi")
+
+![ledger-hwi](img/screenshot.01.26.ledger.hwi.png "ledger-hwi")
 
 This is the signature we get back:
 

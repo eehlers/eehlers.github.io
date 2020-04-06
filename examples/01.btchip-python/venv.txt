@@ -13,4 +13,5 @@ export SEED="barely sun snack this snack relief pipe attack disease boss enlist 
 ./speculos.py --seed "$SEED" apps/btc.elf
 
 LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 ./sign.00.btchip.py
+LEDGER_PROXY_ADDRESS=127.0.0.1 LEDGER_PROXY_PORT=9999 ./testMessageSignature2.py
 
