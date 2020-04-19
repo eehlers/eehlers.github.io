@@ -13,7 +13,7 @@ Any message that you sign must always be explicit, including at least your name 
 
 Before signing the message, bitcoin prepends to it the magic string `Bitcoin Signed Message:`.  This is to prevent someone from tricking you into signing something that you shouldn't, such as a transaction.
 
-Normally, in order to verify a signature cryptographically, you would need the message, the signature, and the public key.  However, the ECDSA cryptography underlying bitcoin supports derivation of the public key given the message and the signature.  Bitcoin exploits this feature of ECDSA and hence bitcoin can verify a signature using only the message, the public key is not required.  Usually you pass to the verification function the address against which the message was signed, the function derives the public key and confirms that it matches the given address.
+Normally, in order to verify an ECDSA signature, you would need the message, the signature, and the public key.  However, the ECDSA cryptography underlying bitcoin supports implicit derivation of the public key(s) for which the signature would be valid, given the message and the signature.  Namely, there are two public keys, associated to the ECDSA signature nonce k generating an elliptic curve point k.G = (x, y) with an odd or even y coordinate.  Bitcoin message signing exploits this feature of ECDSA and hence can verify a signature using only the message and the address associated to the public key (plus the information about y being odd or even).  The public key itself is not required.  You pass to the verification function the address against which the message was signed, the function derives the public key and confirms that it matches the given address.
 
 ## Seed Phrase
 
@@ -244,15 +244,15 @@ CXCALL int cx_ecdsa_sign(const cx_ecfp_private_key_t WIDE *pvkey PLENGTH(
                          unsigned int *info PLENGTH(sizeof(unsigned int)));
 ```
 
-It's in the description for the return value: *Set CX_ECCINFO_PARITY_ODD if Y is odd when computing k.G*.  So that's it.  When Y is odd, ledger overwrites the first byte of the DER signature with `0x31`.  Presumably that's meant to help a consumer of the signature to identify the public key to which the signature relates.
+It's in the description for the return value: *Set CX_ECCINFO_PARITY_ODD if Y is odd when computing k.G*.  So that's it.  When the y coordinate of k.G = (x, y) is odd, ledger signals that switching to one the first bit of the canonical leading `0x30` byte, turning it into `0x31`.  That's meant to help a consumer of the signature to identify the public key to which the signature relates.
 
 # Verification
 
-If you take the signature that HWI returns in standard format, you can pass that for verification to any app that supports bitcoin message signing, e.g. electrum.  What if you want to verify a signature on the ledger?
+If you take the signature that HWI returns in the bitcoin message signing format, you can pass that for verification to any app aware of that peculiar standard, e.g. electrum.  What if you want to verify a signature on the ledger?
 
-As far as I can tell, ledger does not supply any python scripts to verify a bitcoin message signature, nor does `ledger-app-btc` implement a verification function.  However the [SDK](https://github.com/LedgerHQ/nanos-secure-sdk) does include a function `cx_ecdsa_verify()` and you can call that.
+As far as I can tell, ledger does not supply any python scripts to verify a bitcoin message signature, nor does `ledger-app-btc` implement a verification function.  However the [SDK](https://github.com/LedgerHQ/nanos-secure-sdk) does implement ECDSA signature verification in function `cx_ecdsa_verify()` and you can call that.
 
-Suppose you have the message, the public key against which it was signed, and the signature.  Before you can verify the signature, you must first prepend to the message the magic string mentioned above, and take the hash of the result.  Ledger already contains the code to do that, in the place where it signed the message (`btchip_apdu_sign_message()`), so you just need to copy and paste that functionality into your new verification function, and then call `cx_ecdsa_verify()`.
+You have the signature, the message, and have identified the public key against which the message was signed, thanks to that extra `0x30`/`0x31` bit.  Before you can verify the signature, you must first prepend to the message the magic string mentioned above (as it is that resulting "magic message" that was actually signed), and take the hash of the result.  Ledger already contains the code to do that, in the place where it signed the message (`btchip_apdu_sign_message()`), so you just need to copy and paste that functionality into your new verification function, and then call `cx_ecdsa_verify()`.
 
 Here is an example function.  When I call this function with the inputs from our example, it returns true!
 ```c
@@ -286,4 +286,4 @@ int verify(
 }
 ```
 
-The signature that you pass to this function must be in DER format, such as a signature generated by the ledger.  If ledger changed the first byte from `0x30` to `0x31`, you have to change it back to `0x30` before passing it to `cx_ecdsa_verify()`, otherwise verification will fail.
+The signature that you pass to this function must be in DER format, such as a signature generated by the ledger.  If ledger changed the first byte from `0x30` to `0x31`, you have to change it back to `0x30` before passing it to `cx_ecdsa_verify()`, otherwise it would not be a standard DER signature and the verification would fail.
