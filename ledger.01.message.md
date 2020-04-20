@@ -89,7 +89,17 @@ First the script prints out a hash of the message:
 
     b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
 
-Then the script asks the device to sign the message.  The device displays the above hash, this is to make sure that you are signing the right thing.  Then it prompts you to sign the message.
+The script calculated the has like so:
+
+```python
+messageStr = "hello world"
+message = bytes(messageStr, encoding='utf8')
+h = hashlib.sha256()
+h.update(message)
+print("hash=\n" + h.hexdigest())
+```
+
+Then the script asks the device to sign the message.  The device displays the above hash, this is to make sure that you are signing the right thing.  Then it prompts you to sign the message.  The actual value that you sign is not the hash shown above, but rather a hash of the message after the magic string has been prepended to it, as described earlier.
 
 ![ledger-btchip](img/screenshot.01.11.ledger.btchip.png "ledger-btchip")
 
@@ -244,7 +254,22 @@ CXCALL int cx_ecdsa_sign(const cx_ecfp_private_key_t WIDE *pvkey PLENGTH(
                          unsigned int *info PLENGTH(sizeof(unsigned int)));
 ```
 
-It's in the description for the return value: *Set CX_ECCINFO_PARITY_ODD if Y is odd when computing k.G*.  So that's it.  When the y coordinate of k.G = (x, y) is odd, ledger signals that switching to one the first bit of the canonical leading `0x30` byte, turning it into `0x31`.  That's meant to help a consumer of the signature to identify the public key to which the signature relates.
+It's in the description for the return value: *Set CX_ECCINFO_PARITY_ODD if Y is odd when computing k.G*.  So that's it.  When the y coordinate of k.G = (x, y) is odd, ledger signals that by flipping the value of the `info` parameter to one.  That's meant to help a consumer of the signature to identify the public key to which the signature relates.
+
+If you look at the spot where the ledger app calls `cx_ecdsa_sign()` - this is in function [`btchip_signverify_finalhash()`](https://github.com/LedgerHQ/ledger-app-btc/blob/c41e78c4fc71daa85527ed6e0cd542f224279801/src/btchip_helpers.c#L449-L450) - you see this code:
+
+```c
+if (info & CX_ECCINFO_PARITY_ODD) {
+    out[0] |= 0x01;
+```
+So here ledger signals the odd y coordinate by taking the leading byte, with its canonical value of `0x30`, and switching the first bit to one, resulting in a value of `0x31`.
+
+In the python package `btchip-python`, in function [`untrustedHashSign()`](https://github.com/LedgerHQ/btchip-python/blob/53f0acf41f805bbaf8d3745e01848f86c315c022/btchip/btchip.py#L390), you find this code:
+
+```python
+result[0] = 0x30
+```
+So in that case, `btchip-python` has retrieved a signature from `ledger-app-btc` and, no mattter what comes back, it sets the first byte to `0x30`.  So if you retrieve the signature that way then you will always get back a `0x30`.  If you call `ledger-app-btc` directly then you could get back a signature starting with `0x31`.
 
 # Verification
 
