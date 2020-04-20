@@ -9,15 +9,15 @@ A followup to this article may be found at the following link: [Programming Ledg
 
 The Ledger documentation uses a lot of acronyms, and occasionally you will come across an acronym before you have seen its definition.  Here is a list of terms that you are likely to encounter, and their meanings:
 
-- APDU - Application Protocol Data Unit
-- BOLOS - Blockchain Open Ledger Operating System
-- BAGL - BOLOS Application Graphics Library
-- HAL - Hardware Abstraction Layer
-- MCU - STM32 microcontroller
-- MPU - Memory Protection Unit (regulates access to flash memory)
-- SE - Secure Element
-- SEPROXYHAL or SEPH - SE-MCU link protocol
-- HID - Human Interface Device
+- APDU - Application Protocol Data Unit.  Command/response packet exchanged between device and host.
+- BOLOS - Blockchain Open Ledger Operating System.  The OS for ledger devices.
+- BAGL - BOLOS Application Graphics Library.  Toolkit for building GUIs.
+- HAL - Hardware Abstraction Layer.
+- MCU - STM32 microcontroller.  Acts as router between Secure Element and peripherals.
+- MPU - Memory Protection Unit.  Regulates access to flash memory.
+- SE - Secure Element.  Stores secrets.
+- SEPROXYHAL or SEPH - SE-MCU link protocol.  Governs communication with the Secure Element.
+- HID - Human Interface Device.
 
 ## Documentation
 
@@ -29,7 +29,7 @@ The ledger documentation is here: [Ledger Documentation Hub](https://ledger.read
 
 You need to install the prerequisites and set up the udev rules.  If you take a local clone of the repo, you can create a virtual environment like so:
 
-    virtualenv venv
+    python -m venv venv
     source venv/bin/activate
     cd /home/projects/blue-loader-python
     pip install .
@@ -45,7 +45,7 @@ Here is the command to generate a list of the apps that have been installed to a
 
 If you take a local clone of the repo, you can create a virtual environment like so:
 
-    virtualenv venv
+    python -m venv venv
     source venv/bin/activate
     pip install ecdsa
     cd /home/projects/btchip-python
@@ -74,7 +74,7 @@ Here is the repo: [https://github.com/bitcoin-core/HWI](https://github.com/bitco
 
 If you take a local clone of the repo, you can create a virtual environment like so:
 
-    virtualenv venv
+    python -m venv venv
     source venv/bin/activate
     cd /home/projects/HWI
     pip install .
@@ -163,6 +163,8 @@ Earlier we saw an HWI script that sends a TX to the ledger for signature: [sign.
 The client process (e.g. a Python script on your laptop) communicates with the ledger by exchanging APDUs (Application Protocol Data Units).  This is explained in more detail in the ledger documentation that was linked earlier: [Application Structure and I/O](https://ledger.readthedocs.io/en/latest/userspace/application_structure.html).
 
 *The command / response scheme used to address the device is similar to the ISO/IEC 7816-4 smartcard protocol. Each command / response packet is called an APDU. The application is driven by a never-ending APDU interpretation loop called straight from the application main function.*
+
+Ledger provide a hello world app called [Boilerplate](https://github.com/LedgerHQ/ledger-app-boilerplate) and that project includes a document which gives additional information regarding APDUs: [boilerplate application : Common Technical Specifications](https://github.com/LedgerHQ/ledger-app-boilerplate/blob/master/doc/api.asc)
 
 When you run a `blue-loader-python` command, you can pass the `--apdu` argument to see the APDUs that are exchanged by the client and the device.  Here is the `listApps` command that we ran earlier, now with the `--apdu` argument:
 
