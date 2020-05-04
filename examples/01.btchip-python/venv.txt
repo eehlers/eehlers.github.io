@@ -1,8 +1,8 @@
 
-virtualenv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install ecdsa
-cd /home/erik/projects/ledger/btchip-python.ledger
+cd /home/erik/projects/eehlers.github.io/examples.03/repos/btchip-python
 pip install .
 
 cd /home/erik/projects/ledger/btchip-python.ledger/samples

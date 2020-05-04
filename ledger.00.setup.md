@@ -51,7 +51,11 @@ If you take a local clone of the repo, you can create a virtual environment like
     cd /home/projects/btchip-python
     pip install .
 
-In the `samples` directory of the repo, there is a script that you can run to print out the firmware version of a connected ledger (which must have an app open):
+If you want to do a quick sanity check to confirm that `btchip-python` is correctly installed, and talking to the ledger, you can use the following script to accomplish that:
+
+    btchip-python/samples/getFirmwareVersion.py
+
+In spite of its name, the script does not get the firmware version (which on my device is currently `1.6.0`).  Rather it gets the version number of the ledger bitcoin app (which on my device is currently `1.3.18`).  Before you run the command, you must ensure that the device is connected, and that the `Bitcoin` app is running:
 
     (venv) erik@laptop3:~/projects/btchip-python/samples$ python getFirmwareVersion.py 
     => b'e0c4000000'
@@ -177,7 +181,7 @@ When you run a `blue-loader-python` command, you can pass the `--apdu` argument 
 
 This time it prints out the APDUs that pass back and forth between the client and the device.  You can see that the `listApps` command sends APDU `e0de000000`.  You can use the `runScript` command to send a raw APDU.  Here we run the same command as above, this time passing the APDU to `runScript` instead of calling `listApps`:
 
-    (venv) erik@laptop3:~$ echo 'e0de000000' | python3 -m ledgerblue.runScript --apdu
+    (venv) erik@laptop3:~$ echo 'e0de000000' | python -m ledgerblue.runScript --apdu
     HID => e0de000000
     HID <= 0154000c8e545a130907b66842863b7888113105d26b9757edd4a594c2437e8425b0d54bac8376955a821a8aa04acb48203a7df7113bfd1a0f479552d9098e032fa9b19170180e426974636f696e205265674e65749000
     <= Clear bytearray(b'\x01T\x00\x0c\x8eTZ\x13\t\x07\xb6hB\x86;x\x88\x111\x05\xd2k\x97W\xed\xd4\xa5\x94\xc2C~\x84%\xb0\xd5K\xac\x83v\x95Z\x82\x1a\x8a\xa0J\xcbH :}\xf7\x11;\xfd\x1a\x0fG\x95R\xd9\t\x8e\x03/\xa9\xb1\x91p\x18\x0eBitcoin')
@@ -211,7 +215,7 @@ To get the name of the corresponding C function, consult the relevant array in f
         BTCHIP_INS_GET_COIN_VER,           // btchip_apdu_get_coin_version
     };
 
-There you can see that `BTCHIP_INS_GET_FIRMWARE_VERSION` maps to function `btchip_apdu_get_firmware_version()`.  Indeed if you run the command above you get back the version number of the firmware.
+There you can see that `BTCHIP_INS_GET_FIRMWARE_VERSION` maps to function `btchip_apdu_get_firmware_version()`.  Indeed if you run the command above it calls `btchip_apdu_get_firmware_version()`.  As mentioned previously, that function doesn't actually return the version number of the firmware, it returns the version number of the bitcoin app.
 
 ## Debugging
 
