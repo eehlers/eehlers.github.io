@@ -1,7 +1,7 @@
 
-virtualenv venv
+python3 -m venv venv
 source venv/bin/activate
-cd /home/erik/projects/ledger/authorization/repos/blue-loader-python
+cd /home/erik/projects/eehlers.github.io/examples.03/repos/blue-loader-python
 pip install .
 
 echo 'e0c4000000' | python -m ledgerblue.runScript --apdu
