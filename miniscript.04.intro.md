@@ -11,7 +11,7 @@ Below is a list of some of the major resources relating to Miniscript:
 
 [Miniscript website](http://bitcoin.sipa.be/miniscript/) - This web page provides a specification for the language, and utilities for compiling and analyzing scripts.
 
-[miniscript repo on github](https://github.com/sipa/miniscript) - _This repository contains a C++ implementation of Miniscript_
+[miniscript repo on github](https://github.com/sipa/miniscript) - _This repository contains a C++ implementation of Miniscript._
 
 [rust-miniscript repo on github](https://github.com/apoelstra/rust-miniscript) - _Library for handling Miniscript, which is a subset of Bitcoin Script designed to support simple and general tooling. Miniscripts represent threshold circuits of spending conditions, and can therefore be easily visualized or serialized as human-readable strings._
 
@@ -111,7 +111,7 @@ The miniscript web page includes a utility for converting a policy into miniscri
 
 Consider a vault wallet which is maintained by a group of custodians, each holding one key from a multisig keychain.  Once per month the custodians transfer the contents of the vault from one address to another in the same wallet, as proof of reserve.  A recovery keychain serves as protection in case of problems, e.g. if a custodian loses a key.  The recovery keychain can spend the contents of the vault only after a given relative block height is passed.
 
-This is not a complete solution for bitcoin custody.  It is only a summary of one part of a larger solution, and it has been simplified for purposes of testing, but it's sufficient to use as a working example of miniscript.  Here is a handwritten locking script which implements the requirements of the vault:
+This is not a complete vault solution.  It is only a summary of one part of a larger solution, and it has been simplified for purposes of testing, but it's sufficient to use as a working example of miniscript.  Here is a handwritten locking script which implements the requirements of the vault:
 
     OP_IF,
         2, vault_pubkey1, vault_pubkey2, vault_pubkey3, 3, OP_CHECKMULTISIG,
@@ -324,7 +324,7 @@ The miniscript compiler accepts a simple policy syntax expressing the intent of 
 
 Once you get your locking script, it's up to you to figure out all of the various unlocking scripts which might be necessary to spend the funds.  As we have seen above, the syntax of the scripts, and the logic required for the unlocking scripts, can be convoluted to say the least.
 
-At first glance it may seem that writing all of the scripts and unlocking scripts by hand is easier than using miniscript.  However this ignores the less obvious benefits that miniscript offers over script.  As explained on the [miniscript web page](http://bitcoin.sipa.be/miniscript/):
+At first glance it may seem that writing all of the scripts and unlocking scripts by hand is easier than using miniscript.  However this ignores the less obvious benefits that miniscript offers over Script.  As explained on the [miniscript web page](http://bitcoin.sipa.be/miniscript/):
 
 _Bitcoin Script is an unusual stack-based language with many edge cases, designed for implementing spending conditions consisting of various combinations of signatures, hash locks, and time locks. Yet despite being limited in functionality it is still highly nontrivial to:_
 
@@ -335,5 +335,5 @@ _Bitcoin Script is an unusual stack-based language with many edge cases, designe
 - _Given a script, be able to predict the cost of spending an output._
 - _Given a script, know whether particular resource limitations like the ops limit might be hit when spending._
 
-_Miniscript functions as a representation for scripts that makes these sort of operations possible. It has a structure that allows composition. It is very easy to statically analyze for various properties (spending conditions, correctness, security properties, malleability, ...). It can be targeted by spending policy compilers (see below). Finally, compatible scripts can easily be converted to Miniscript form - avoiding the need for additional metadata for e.g. signing devices that support it._
+_Miniscript functions as a representation for scripts that makes these sort of operations possible. It has a structure that allows composition. It is very easy to statically analyze for various properties (spending conditions, correctness, security properties, malleability, ...). It can be targeted by spending policy compilers. Finally, compatible scripts can easily be converted to Miniscript form - avoiding the need for additional metadata for e.g. signing devices that support it._
 
