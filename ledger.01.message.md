@@ -273,7 +273,7 @@ So in that case, `btchip-python` has retrieved a signature from `ledger-app-btc`
 
 # Verification
 
-If you take the signature that HWI returns in the bitcoin message signing format, you can pass that for verification to any app aware of that peculiar standard, e.g. electrum.  What if you want to verify a signature on the ledger?
+If you take the signature that HWI returns in the bitcoin message signing format, you can pass that for verification to any app aware of that particular standard, e.g. electrum.  What if you want to verify a signature on the ledger?
 
 As far as I can tell, ledger does not supply any python scripts to verify a bitcoin message signature, nor does `ledger-app-btc` implement a verification function.  However the [SDK](https://github.com/LedgerHQ/nanos-secure-sdk) does implement ECDSA signature verification in function `cx_ecdsa_verify()` and you can call that.
 
