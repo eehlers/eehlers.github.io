@@ -1,7 +1,7 @@
 
 # Programming Ledger #3 - ECDSA Signatures
 
-Normally you use your ledger to sign bitcoin transactions.  You can also use it to sign bitcoin messages, as explained in the previous article, [Programming Ledger #2 - Bitcoin Message Signing](./ledger.01.message.md).  Another possibility is to use the ledger to generate ECDSA signatures for messages other than transactions.
+Normally you use your ledger to sign bitcoin transactions.  You can also use it to sign bitcoin messages, as explained in the previous article, [Programming Ledger #2 - Bitcoin Message Signing](./ledger.01.message.md).  Another possibility is to use the ledger to generate ECDSA signatures for arbitrary messages which are neither transactions nor bitcoin messages.
 
 Normally you would not use a ledger in this way.  When signing a transaction, you generate an ECDSA signature of the hash of the transaction - but you don't send the hash of the transaction to the ledger.  You send to the ledger the transaction itself.  The ledger parses the transaction, validates it, and asks you to confirm all of the relevant properties of the transaction before signing.  All of this validation is very important to ensure that you don't sign anything you shouldn't.
 
@@ -19,7 +19,7 @@ So normally you would not generate an ECDSA signature of some arbitrary value.  
 
 ## Configuring a ledger
 
-You should acquire a Nano S that will be dedicated to the purpose of generating signatures.  Ensure that the device is running the latest version of the ledger firmware, version 1.6.0.  If the device is on an older version of the firmware, upgrade it using [Ledger Live](https://support.ledger.com/hc/en-us/articles/360006395553).
+You should acquire a Nano S that will be dedicated to the purpose of generating signatures.  Ensure that the device is running the latest version of the ledger firmware (`1.6.0` at the time of this writing).  If the device is on an older version of the firmware, upgrade it using [Ledger Live](https://support.ledger.com/hc/en-us/articles/360006395553).
 
 Then do a factory reset on the device (`Settings | Security | Reset all`).
 
@@ -29,7 +29,7 @@ Then initialize the device with your secret.  Restart the device in recovery mod
 
 ## Installing `ecdsasig`
 
-`ecdsasig` is an app which generates an ECDSA signature of an arbitrary message.  The `ecdsasig` app is headless, there is no user interaction, apart from opening the app initially.  At present `ecdsasig` is hard coded to generate a signature using the key found at derivation path `m/0`.  If necessary `ecdsasig` could easily be enhanced to parameterize this value.
+`ecdsasig` is an app which generates an ECDSA signature of an arbitrary message.  The `ecdsasig` app is headless, there is no user interaction, apart from opening the app initially.  At present `ecdsasig` is hard coded to generate a signature using the key found at derivation path `m/42h/0h`.  If necessary `ecdsasig` could easily be enhanced to parameterize this value.
 
 Here is the repo for `ecdsasig`: <https://github.com/eehlers/ecsdasig>
 
