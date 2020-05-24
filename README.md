@@ -13,3 +13,5 @@ CheckSig's solution for bitcoin custody relies on a multivendor solution which i
 
 [Programming Ledger #2 - Bitcoin Message Signing](./ledger.01.message.md)
 
+[Programming Ledger #3 - ECDSA Signatures](./ledger.02.ecdsa.md)
+
