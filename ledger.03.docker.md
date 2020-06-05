@@ -13,7 +13,7 @@ This document outlines an approach for building `ledger-app-btc` in docker.  Her
 
 ## Docker and Secrets
 
-Secrets stored in a Docker image are not secure.  So if your build includes secrets - for example, passwords or tokens required to access github - you should be sure not to include them in the image.  The approach outlined here separates the build into two steps, 1) creating the image and 2) running the container.  Any sensitive steps should be deferred to the second step.
+Secrets stored in a Docker image are not secure.  So if your build includes secrets - for example, passwords or tokens required to access github - you should take care not to include them in the image.  The approach outlined here separates the build into two steps, 1) creating the image and 2) running the container.  Any sensitive steps should be deferred to the second step.
 
 Regarding the problem that secrets in a Docker image are not secure, a workaround is to use Docker Swarm, which supports secure Secrets Management. Swarm is intended for a cluster of containers. Using Swarm for a single container solely to get access to Secrets Management seems like overkill and the approach is not adopted here.
 

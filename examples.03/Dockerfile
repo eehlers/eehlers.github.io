@@ -11,8 +11,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-setuptools \
     python3-venv \
-    tar \
-    vim
+    tar
 
 WORKDIR /build/bolos-devenv
 ADD https://launchpad.net/gcc-arm-embedded/5.0/5-2016-q1-update/+download/gcc-arm-none-eabi-5_3-2016q1-20160330-linux.tar.bz2 .
