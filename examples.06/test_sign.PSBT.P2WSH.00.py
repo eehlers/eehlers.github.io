@@ -68,29 +68,8 @@ class SignatureTests(BitcoinTestFramework):
         self.log.info(f"\n    DEBUG START")
         n0 = self.nodes[0]
 
-        # TRANSACTION #0 - fund the client wallet from the default wallet
+        # TRANSACTION #0 - fund the frozen wallet from the default wallet
         rpc_default = n0.get_wallet_rpc("")
-        n0.createwallet(wallet_name="wallet_client")
-        rpc_client = n0.get_wallet_rpc("wallet_client")
-        addr0 = rpc_client.getnewaddress()
-        self.log.info(f"\n    DEBUG addr0={addr0}")
-
-        txid0 = rpc_default.sendtoaddress(addr0, 10.0)
-        n0.generate(6)
-        self.sync_all()
-
-        # dump the tx to the log
-        raw_tx0 = rpc_default.getrawtransaction(txid0, True)
-        s = pprint.pformat(raw_tx0)
-        self.log.info(f"\n    DEBUG tx0={s}")
-
-        # write the balances to the log
-        bal0 = rpc_default.getbalance()
-        self.log.info(f"\n    DEBUG balance default={bal0:f}")
-        bal0 = rpc_client.getbalance()
-        self.log.info(f"\n    DEBUG balance client={bal0:f}")
-
-        # TRANSACTION #1 - pay from the client wallet to the frozen wallet
         n0.createwallet(wallet_name="wallet_frozen")
         rpc_frozen = n0.get_wallet_rpc("wallet_frozen")
         addr1 = rpc_frozen.getnewaddress()
@@ -124,21 +103,18 @@ class SignatureTests(BitcoinTestFramework):
         self.log.info(f"\n    DEBUG prog1={prog1}")
 
         # fund_wallet()
-        txid1 = rpc_client.sendtoaddress(prog1, 9.0)
+        txid1 = rpc_default.sendtoaddress(prog1, 9.0)
         n0.generate(6)
         self.sync_all()
 
         # dump the tx to the log
-        raw_tx1 = rpc_client.getrawtransaction(txid1, True)
+        raw_tx1 = rpc_default.getrawtransaction(txid1, True)
         s = pprint.pformat(raw_tx1)
         self.log.info(f"\n    DEBUG tx1={s}")
 
         # write the balances to the log
         bal0 = rpc_default.getbalance()
         self.log.info(f"\n    DEBUG balance default={bal0:f}")
-        bal0 = rpc_client.getbalance()
-        self.log.info(f"\n    DEBUG balance client={bal0:f}")
-        #rpc_frozen.importaddress(prog1)
         rpc_frozen.importmulti([
             {
                  'scriptPubKey': script_pubkey.hex(),
@@ -154,8 +130,7 @@ class SignatureTests(BitcoinTestFramework):
 
         # TRANSACTION #2 - pay from the frozen wallet to the cold wallet
         n0.createwallet(wallet_name="wallet_cold")
-        rpc_cold = n0.get_wallet_rpc("wallet_cold")
-        addr2 = rpc_cold.getnewaddress()
+        addr2 = rpc_default.getnewaddress()
         self.log.info(f"\n    DEBUG addr2={addr2}")
 
         # construct_transaction()
@@ -207,35 +182,8 @@ class SignatureTests(BitcoinTestFramework):
         # write the balances to the log
         bal0 = rpc_default.getbalance()
         self.log.info(f"\n    DEBUG balance default={bal0:f}")
-        bal0 = rpc_client.getbalance()
-        self.log.info(f"\n    DEBUG balance client={bal0:f}")
         bal0 = rpc_frozen.getbalance()
         self.log.info(f"\n    DEBUG balance frozen={bal0:f}")
-        bal0 = rpc_cold.getbalance()
-        self.log.info(f"\n    DEBUG balance cold={bal0:f}")
-
-        # TRANSACTION #3 - pay from the cold wallet back to the client wallet
-        addr3 = rpc_client.getnewaddress()
-        self.log.info(f"\n    DEBUG addr3={addr3}")
-
-        txid3 = rpc_cold.sendtoaddress(addr3, 7.0)
-        n0.generate(6)
-        self.sync_all()
-
-        # dump the tx to the log
-        raw_tx3 = rpc_cold.getrawtransaction(txid3, True)
-        s = pprint.pformat(raw_tx3)
-        self.log.info(f"\n    DEBUG tx3={s}")
-
-        # write the balances to the log
-        bal0 = rpc_default.getbalance()
-        self.log.info(f"\n    DEBUG balance default={bal0:f}")
-        bal0 = rpc_client.getbalance()
-        self.log.info(f"\n    DEBUG balance client={bal0:f}")
-        bal0 = rpc_frozen.getbalance()
-        self.log.info(f"\n    DEBUG balance frozen={bal0:f}")
-        bal0 = rpc_cold.getbalance()
-        self.log.info(f"\n    DEBUG balance cold={bal0:f}")
 
         self.log.info(f"\n    DEBUG END")
 
