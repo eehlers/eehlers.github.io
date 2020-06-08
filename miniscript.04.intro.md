@@ -17,6 +17,10 @@ Below is a list of some of the major resources relating to Miniscript:
 
 [Crate miniscript](https://docs.rs/miniscript/0.12.0/miniscript/) - Online documentation for rust-miniscript.
 
+[Miniscript wiki](https://miniscript.org/wiki/Main_Page)
+
+[Miniscript editor](https://magicalbitcoin.org/repl/playground/)
+
 Anybody interested in learning miniscript should start by reading the first link above, the language reference.  I will come back to that at the end of this document.  First let's take a quick look at the two libraries.
 
 ## C++ Implementation
