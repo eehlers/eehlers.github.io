@@ -17,12 +17,6 @@ Burn the SD-to-eMMc image to a microSD card and install the image to the R6C.
 
 Now burn the SD image to a microSD card and start up the NanoPi from the SD.  We do this so as not to mount the eMMC partitions.
 
-In the output that scrolls by from the serial port, you will see:
-
-    [  274.055328] Kernel command line: bootargs=storagemedia=sd androidboot.storagemedia=sd androidboot.mode=normal androidboot.dtbo_idx=1 root=/dev/mmcblk2p8 androidboot.verifiedbootstate=orange earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 coherent_pool=1m irqchip.gicv3_pseudo_nmi=0 rw rootfstype=ext4 data=/dev/mmcblk0p9 consoleblank=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
-
-We want to change `root=/dev/mmcblk2p8` to `root=/dev/nvme0n1p1`.  First we have to clone `/dev/mmcblk2p8` to `/dev/nvme0n1p1`.
-
 Do `sudo fdisk -l` to list all mounted partitions.  `/dev/mmcblk0` is the microSD card.  `/dev/mmcblk2` is the eMMC.  `/dev/nvme0n1` is the SSD.  The root partition on the eMMC is `/dev/mmcblk2p8`.
 
 Do `sudo fdisk /dev/nvme0n1` and create the new root partition on the SSD.  Give it the default start offset of 2028, and the same size (7995392) as the existing root partition:
