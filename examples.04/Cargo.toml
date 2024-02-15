@@ -1,0 +1,12 @@
+[package]
+name = "rust-miniscript-example"
+version = "0.1.0"
+authors = ["Eric Ehlers <eric.ehlers@reposit.be>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bitcoin = "0.23"
+miniscript = "0.12.0"
+
