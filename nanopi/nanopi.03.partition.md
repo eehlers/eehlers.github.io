@@ -9,11 +9,11 @@ The device can boot from the microSD card, or from eMMC (which is optional).  Th
 
 ## Download the SD Images
 
-Go to the [vendor's download link](https://drive.google.com/drive/folders/17e39J34E4308WaKZimcjWO2_daLseAr2) and get the images for SD and SD-to-eMMc.
+Go to the [vendor's download link](https://drive.google.com/drive/folders/17e39J34E4308WaKZimcjWO2_daLseAr2) and get the images for SD and SD-to-eMMc.  You will have to choose which operating system you want.  For this tutorial I am using ubuntu on both the laptop and the NanoPi.
 
 ## Install to the eMMC
 
-Burn the SD-to-eMMc image to a microSD card and install the image to the R6C.  You will have to choose which operating system you want.  For this tutorial I am using ubuntu on both the laptop and the NanoPi.
+Burn the SD-to-eMMc image to a microSD card and install the image to the R6C.
 
 ## Clone the root partition
 
