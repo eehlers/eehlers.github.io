@@ -27,6 +27,8 @@ Now everything fits.
 
 ![ports2](img/nanopir6c.30.back.jpg "ports2")
 
+In this picture I have the ethernet cable connected to the LAN port.  That is because I am sharing the internet connection from my laptop to the NanoPi.  To use the NanoPi as a router you connect the WAN port to your main router and the LAN port to your network.
+
 ## Observations
 
 Below are some points that I have noted about the device.  I am new to this and I may have gotten some information wrong, if you see a mistake then please let me know.
