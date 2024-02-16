@@ -1,11 +1,15 @@
 
 [Back to Index](nanopi.00.index.md)
 
+[1. Notes](nanopi.01.notes.md)
+
+[3. Load Root Partition From SSD](nanopi.03.partition.md)
+
 # 2. Serial Port
 
 It is easier to troubleshoot problems with the device if you connect to the serial port.  For example this lets you get to the U-Boot command prompt.
 
-You will need a utility to connect to the serial port.  The standard is minicom.  I use BootTerm:
+You will need a command line utility to connect to the serial port.  The standard is minicom.  I use BootTerm:
 
     git clone https://github.com/wtarreau/bootterm
     cd bootterm

@@ -1,6 +1,8 @@
 
 [Back to Index](nanopi.00.index.md)
 
+[2. Serial Port](nanopi.02.serial_port.md)
+
 # 1. Notes
 
 ![desktop](img/nanopir6c.00.desktop.jpg "desktop")
@@ -45,7 +47,11 @@ The device can boot from the microSD card, or from eMMC (which is optional).  Th
 
 Many devices of this type allow you to create a script which gets loaded by the bootloader to customize the device startup.  The R6C does not support this feature, the manufacturer's fork of U-Boot is not configured to load a boot script.
 
+### U-Boot parameters ignored
+
+At startup you can hit `CTRL-C` to access the U-Boot "monitor" (command prompt), where you can edit the startup parameters.  Then you hit `boot` and normally your changes are applied to the current run.  But this does not seem to work on the R6C.  I did some digging and it turns out that the bootloader disregards any values entered into the monitor.  This looks to me like a flaw in the vendor's implementation of U-Boot.
+
 ### Unable to Save U-Boot parameters
 
-Normally from the U-Boot monitor (command prompt) you should be able to save any changes with the command `saveenv`.  This does not work on the R6C, the bootloader was compiled with this feature disabled.  I tried recompiling the bootloader from source with the feature enabled but it still didn't work, I think because the SD image lacks the partition which U-Boot requires to store its state.
+Normally from the U-Boot monitor you should be able to save any changes with the command `saveenv`.  This does not work on the R6C, the bootloader was compiled with this feature disabled.  I tried recompiling the bootloader from source with the feature enabled but it still didn't work, I think because the SD image lacks the partition which U-Boot requires to store its state.  A similar problem is described [here](https://e2e.ti.com/support/processors-group/processors/f/processors-forum/330933/environment-variable-store-issue).
 

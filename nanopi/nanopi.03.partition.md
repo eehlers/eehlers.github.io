@@ -1,6 +1,8 @@
 
 [Back to Index](nanopi.00.index.md)
 
+[2. Serial Port](nanopi.02.serial_port.md)
+
 # 3. Load Root Partition From SSD
 
 The device can boot from the microSD card, or from eMMC (which is optional).  There is an NVMe SSD slot, but the device is not capable of booting from SSD.  The best you can do is to install the root partition to the SSD and boot from the eMMC.
@@ -11,7 +13,7 @@ Go to the [vendor's download link](https://drive.google.com/drive/folders/17e39J
 
 ## Install to the eMMC
 
-Burn the SD-to-eMMc image to a microSD card and install the image to the R6C. 
+Burn the SD-to-eMMc image to a microSD card and install the image to the R6C.  You will have to choose which operating system you want.  For this tutorial I am using ubuntu on both the laptop and the NanoPi.
 
 ## Clone the root partition
 
@@ -95,7 +97,7 @@ The instructions for compiling the bootloader are [here](https://wiki.friendlyel
 ```
 Now build U-Boot.
 
-Now you have to rebuild the SD image.  The manufacturer's instructions to do that are [here](https://github.com/friendlyarm/sd-fuse_rk3588/tree/kernel-6.1.y).  Replace the stock `uboot.img` with the one you built.
+Now you have to rebuild the SD image.  The manufacturer's instructions to do that are [here](https://github.com/friendlyarm/sd-fuse_rk3588/tree/kernel-6.1.y).  Replace the stock `uboot.img` with the one you built.  You can build the SD image to test these changes using the microSD card, and/or the SD-to-eMMC image to apply these changes to the eMMC.
 
 Restart the device.  Now in the serial port you should see the effect of your change:
 
