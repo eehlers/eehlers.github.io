@@ -97,7 +97,7 @@ The instructions for compiling the bootloader are [here](https://wiki.friendlyel
 ```
 Now build U-Boot.
 
-Now you have to rebuild the SD image.  The manufacturer's instructions to do that are [here](https://github.com/friendlyarm/sd-fuse_rk3588/tree/kernel-6.1.y).  Replace the stock `uboot.img` with the one you built.  You can build the SD image to test these changes using the microSD card, and/or the SD-to-eMMC image to apply these changes to the eMMC.
+Now you have to rebuild the SD image.  The manufacturer's instructions to do that are [here](https://github.com/friendlyarm/sd-fuse_rk3588/tree/kernel-6.1.y).  Replace the stock `uboot.img` with the one you built.  You can either build the SD image to test these changes using the microSD card, and/or the SD-to-eMMC image to apply these changes to the eMMC.
 
 Restart the device.  Now in the serial port you should see the effect of your change:
 
@@ -109,7 +109,11 @@ Restart the device.  Now in the serial port you should see the effect of your ch
     bootargs=storagemedia=sd androidboot.storagemedia=sd androidboot.mode=normal androidboot.dtbo_idx=1 root=/dev/nvme0n1p1 androidboot.verifiedbootstate=orange earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 coherent_pool=1m irqchip.gicv3_pseudo_nmi=0 rw rootfstype=ext4 data=/dev/mmcblk0p9 consoleblank=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
     ###
 
-And it loads the root partition from NVMe.  You can confirm this by executing the command below after you log in to the machine:
+And it loads the root partition from NVMe:
+
+    [  274.055328] Kernel command line: bootargs=storagemedia=sd androidboot.storagemedia=sd androidboot.mode=normal androidboot.dtbo_idx=1 root=/dev/nvme0n1p1 androidboot.verifiedbootstate=orange earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 coherent_pool=1m irqchip.gicv3_pseudo_nmi=0 rw rootfstype=ext4 data=/dev/mmcblk0p9 consoleblank=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
+
+You can confirm this by executing the command below after you log in to the machine:
 
     pi@NanoPi-R6C:~$ cat /proc/cmdline 
     bootargs=storagemedia=sd androidboot.storagemedia=sd androidboot.mode=normal androidboot.dtbo_idx=1 root=/dev/nvme0n1p1 androidboot.verifiedbootstate=orange earlycon=uart8250,mmio32,0xfeb50000 console=ttyFIQ0 coherent_pool=1m irqchip.gicv3_pseudo_nmi=0 rw rootfstype=ext4 data=/dev/mmcblk0p9 consoleblank=0 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory swapaccount=1
