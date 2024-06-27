@@ -1,4 +1,4 @@
-
+ 
 [Back to Root](../README.md)
 
 # NanoPi R6C
