@@ -1,4 +1,4 @@
- 
+
 [Back to Root](../README.md)
 
 # NanoPi R6C
@@ -8,4 +8,6 @@
 [2. Serial Port](nanopi.02.serial_port.md)
 
 [3. Load Root Partition From SSD](nanopi.03.partition.md)
+
+[4. Running Void Linux on the NanoPi R6C](nanopi.04.void.md)
 
