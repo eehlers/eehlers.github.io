@@ -9,5 +9,5 @@
 
 [3. Load Root Partition From SSD](nanopi.03.partition.md)
 
-[4. Running Void Linux on the NanoPi R6C](nanopi.04.void.md)
+[4. Running Void Linux on the NanoPi R6C](https://gist.github.com/eehlers/40d6e591c9de25c19daaf3728c1e8af2)
 
